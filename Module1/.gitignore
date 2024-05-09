@@ -1,0 +1,7 @@
+.terraform/
+*.tfstate
+*.tfstate.*
+*.terraform.*
+.DS_Store
+.pre-commit-config.yaml
+.terraform.lock.*
