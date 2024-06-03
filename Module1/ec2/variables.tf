@@ -1,8 +1,3 @@
-variable "ami_id" {
-  type        = string
-  description = "AMI for the EC2 instance"
-}
-
 variable "instance_type" {
   type        = string
   description = "EC2 Instance Type"
@@ -17,9 +12,6 @@ variable "name" {
   description = "Name of the instance"
 }
 
-variable "vpc_security_group_ids" {
-  type = list(string)
-}
 
 # variable "private_key_algorithm" {
 #   description = "Name of the algorithm to use when generating the private key. Currently-supported values are `RSA` and `ED25519`"
@@ -38,6 +30,36 @@ variable "vpc_security_group_ids" {
 # }
 
 variable "subnet_id" {
+  default = ""
+  type    = string
+}
+
+variable "ingress_rules" {
+  description = "A list of ingress rules for the security group."
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+}
+
+variable "egress_rules" {
+  description = "A list of egress rules for the security group."
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+  }))
+}
+
+variable "security_group_name" {
+  default = ""
+  type    = string
+}
+
+variable "vpc_id" {
   default = ""
   type    = string
 }
